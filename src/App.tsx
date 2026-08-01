@@ -1,12 +1,13 @@
-import { Button } from '@/shared/ui/Button'
+import { Badge } from '@/shared/ui/Badge'
 
 function App() {
   return (
-    <div className="min-h-screen bg-surface p-8 flex gap-4 items-start">
-      <Button variant="primary">Primary</Button>
-      <Button variant="secondary">Secondary</Button>
-      <Button variant="outlined">Outlined</Button>
-      <Button variant="inverted" className="bg-secondary">Inverted</Button>
+    <div className="min-h-screen bg-surface p-8 flex gap-2 items-start flex-wrap">
+      <Badge color="status-open">Open</Badge>
+      <Badge color="status-in-progress">In Progress</Badge>
+      <Badge color="status-resolved">Resolved</Badge>
+      <Badge color="status-closed">Closed</Badge>
+      <Badge color="priority-critical">Critical</Badge>
     </div>
   )
 }
