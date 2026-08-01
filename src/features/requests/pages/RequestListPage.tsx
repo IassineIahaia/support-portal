@@ -6,6 +6,7 @@ import { Badge } from "@/shared/ui/Badge";
 import { Select } from "@/shared/ui/Select";
 import { Button } from "@/shared/ui/Button";
 import { StatusTrail } from "@/features/requests/components/StatusTrail";
+import { ApiErrorState } from '@/shared/ui/ApiErrorState'
 import {
   statusToBadgeColor,
   priorityToBadgeColor,
@@ -33,7 +34,7 @@ export function RequestListPage() {
     setSearchParams(next, { replace: true });
   }
 
-  const { data, isLoading, isError, isFetching } = useServiceRequests({
+  const { data, isLoading, isError, isFetching, error, refetch } = useServiceRequests({
     search,
     status,
     priority,
@@ -118,11 +119,7 @@ export function RequestListPage() {
           Loading requests…
         </div>
       )}
-      {isError && (
-        <div className="font-body text-tertiary">
-          Failed to load requests. Please try again.
-        </div>
-      )}
+   {isError && <ApiErrorState error={error} onRetry={() => refetch()} />}
 
       {data && data.items.length === 0 && (
         <div className="bg-white border border-outline/30 rounded-container p-8 text-center font-body text-on-surface-variant">

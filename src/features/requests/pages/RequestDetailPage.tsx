@@ -4,12 +4,13 @@ import { useServiceRequest } from "@/features/requests/hooks/useServiceRequest";
 import { StatusTrail } from "@/features/requests/components/StatusTrail";
 import { Badge } from "@/shared/ui/Badge";
 import { Button } from "@/shared/ui/Button";
+import { ApiErrorState } from '@/shared/ui/ApiErrorState'
 import { priorityToBadgeColor } from "@/features/requests/lib/badge-mappers";
 import { statusToBadgeColor } from "@/features/requests/lib/badge-mappers";
 
 export function RequestDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { data, isLoading, isError } = useServiceRequest(id);
+  const { data, isLoading, isError, error, refetch } = useServiceRequest(id)
 
   if (isLoading)
     return (
@@ -18,18 +19,16 @@ export function RequestDetailPage() {
       </div>
     );
 
-  if (isError || !data) {
-    return (
-      <div className="p-8">
-        <div className="font-body text-tertiary mb-4">
-          Request not found or failed to load.
-        </div>
-        <Link to="/requests">
-          <Button variant="outlined">Back to list</Button>
-        </Link>
-      </div>
-    );
-  }
+if (isError || !data) {
+  return (
+    <div className="p-8">
+      <ApiErrorState error={error} onRetry={() => refetch()} />
+      <Link to="/requests">
+        <Button variant="outlined">Back to list</Button>
+      </Link>
+    </div>
+  )
+}
 
   return (
     <div className="p-8 max-w-3xl">
