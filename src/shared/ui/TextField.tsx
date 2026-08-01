@@ -18,8 +18,18 @@ export function TextField({ label, error, id, ...props }: TextFieldProps) {
   return (
     <label className="flex flex-col gap-1 text-xs font-body text-on-surface-variant">
       <span className="uppercase tracking-wide font-semibold">{label}</span>
-      <input id={id} className={fieldClasses(Boolean(error))} {...props} />
-      {error && <span className="text-tertiary text-xs normal-case font-normal">{error}</span>}
+      <input
+        id={id}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={fieldClasses(Boolean(error))}
+        {...props}
+      />
+      {error && (
+        <span id={`${id}-error`} role="alert" className="text-tertiary text-xs normal-case font-normal">
+          {error}
+        </span>
+      )}
     </label>
   )
 }
@@ -28,8 +38,19 @@ export function TextAreaField({ label, error, id, ...props }: TextAreaFieldProps
   return (
     <label className="flex flex-col gap-1 text-xs font-body text-on-surface-variant">
       <span className="uppercase tracking-wide font-semibold">{label}</span>
-      <textarea id={id} rows={4} className={fieldClasses(Boolean(error))} {...props} />
-      {error && <span className="text-tertiary text-xs normal-case font-normal">{error}</span>}
+      <textarea
+        id={id}
+        rows={4}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
+        className={fieldClasses(Boolean(error))}
+        {...props}
+      />
+      {error && (
+        <span id={`${id}-error`} role="alert" className="text-tertiary text-xs normal-case font-normal">
+          {error}
+        </span>
+      )}
     </label>
   )
 }
