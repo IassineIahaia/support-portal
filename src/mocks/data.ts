@@ -1,0 +1,58 @@
+import type { components } from '@/shared/types/api'
+
+type ServiceRequest = components['schemas']['ServiceRequest']
+
+export const mockRequests: ServiceRequest[] = [
+  {
+    id: 'REQ-1001',
+    title: 'Unable to access customer portal',
+    description: 'The customer receives "Account locked" after signing in with valid credentials.',
+    category: 'Access',
+    priority: 'HIGH',
+    status: 'OPEN',
+    requesterName: 'Sarah Jenkins',
+    requesterEmail: 'sarah.jenkins@example.com',
+    createdAt: '2026-02-10T08:15:00Z',
+    updatedAt: '2026-02-10T08:15:00Z',
+    version: 1,
+  },
+  {
+    id: 'REQ-1002',
+    title: 'Duplicate invoice on February statement',
+    description: 'Invoice INV-88213 appears twice on the February billing statement.',
+    category: 'Billing',
+    priority: 'MEDIUM',
+    status: 'IN_PROGRESS',
+    requesterName: 'Michael Chen',
+    requesterEmail: 'michael.chen@example.com',
+    createdAt: '2026-02-09T13:42:11Z',
+    updatedAt: '2026-02-11T09:05:30Z',
+    version: 4,
+  },
+  {
+    id: 'REQ-1003',
+    title: 'API Gateway latency issue',
+    description: 'Response times exceed 3 seconds during peak hours since last deployment.',
+    category: 'Backend',
+    priority: 'CRITICAL',
+    status: 'RESOLVED',
+    requesterName: 'Alicia V.',
+    requesterEmail: 'alicia.v@example.com',
+    createdAt: '2026-02-08T10:00:00Z',
+    updatedAt: '2026-02-12T15:30:00Z',
+    version: 3,
+  },
+  {
+    id: 'REQ-1004',
+    title: 'Weekly backup verification',
+    description: 'Routine confirmation that scheduled backups completed without errors.',
+    category: 'Systems',
+    priority: 'LOW',
+    status: 'CLOSED',
+    requesterName: 'System Admin',
+    requesterEmail: 'sysadmin@example.com',
+    createdAt: '2026-02-01T06:00:00Z',
+    updatedAt: '2026-02-02T06:00:00Z',
+    version: 2,
+  },
+]
