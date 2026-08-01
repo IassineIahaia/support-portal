@@ -1,1 +1,44 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@theme {
+  --color-surface: #FFF8F5;
+  --color-surface-card: #FFFFFF;
+  --color-surface-container: #FCEBE0;
+  --color-on-surface: #221A14;
+  --color-on-surface-variant: #544337;
+  --color-outline: #DAC2B1;
+
+  --color-primary: #F5963F;
+  --color-primary-strong: #904D00;
+  --color-on-primary: #FFFFFF;
+  --color-secondary: #1F2938;
+  --color-on-secondary: #FFFFFF;
+  --color-tertiary: #BF0021;
+  --color-on-tertiary: #FFFFFF;
+
+  --color-status-open: #1F2938;
+  --color-status-in-progress: #F5963F;
+  --color-status-resolved: #15803D;
+  --color-status-closed: #94A3B8;
+
+  --color-priority-low: #94A3B8;
+  --color-priority-medium: #1F2938;
+  --color-priority-high: #F5963F;
+  --color-priority-critical: #BF0021;
+
+  --font-headline: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-technical: "IBM Plex Mono", monospace;
+
+  --radius-standard: 0.25rem;
+  --radius-container: 0.5rem;
+
+  --spacing-sidebar: 280px;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+}
