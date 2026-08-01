@@ -19,6 +19,8 @@ const testAuthConfig = {
   authority: 'https://test.auth0.com',
   client_id: 'test-client-id',
   redirect_uri: 'http://localhost:5173/callback',
+  automaticSilentRenew: false,
+  monitorSession: false,
 }
 
 function AllProviders({ children }: { children: ReactNode }) {
