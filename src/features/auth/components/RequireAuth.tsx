@@ -1,5 +1,6 @@
 import { useAuth } from 'react-oidc-context'
 import type { ReactNode } from 'react'
+import { Header } from '@/shared/ui/Header'
 
 export function RequireAuth({ children }: { children: ReactNode }) {
   const auth = useAuth()
@@ -13,5 +14,10 @@ export function RequireAuth({ children }: { children: ReactNode }) {
     return <div className="p-8 font-body text-on-surface-variant">Redirecting to sign in…</div>
   }
 
-  return <>{children}</>
+  return (
+    <div className="min-h-screen bg-surface">
+      <Header />
+      {children}
+    </div>
+  )
 }

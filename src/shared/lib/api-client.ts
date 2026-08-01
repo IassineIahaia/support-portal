@@ -13,12 +13,17 @@ export class ApiError extends Error {
   }
 }
 
-async function request<T>(path: string, options?: RequestInit): Promise<T> {
+interface RequestOptions extends RequestInit {
+  token?: string
+}
+
+async function request<T>(path: string, { token, ...options }: RequestOptions = {}): Promise<T> {
   const response = await fetch(`/api${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...options?.headers,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
     },
   })
 
@@ -27,15 +32,14 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     throw new ApiError(problem)
   }
 
-  // 204 No Content ou respostas vazias
   const text = await response.text()
   return text ? (JSON.parse(text) as T) : (undefined as T)
 }
 
 export const apiClient = {
-  get: <T>(path: string) => request<T>(path),
-  post: <T>(path: string, body: unknown) =>
-    request<T>(path, { method: 'POST', body: JSON.stringify(body) }),
-  patch: <T>(path: string, body: unknown) =>
-    request<T>(path, { method: 'PATCH', body: JSON.stringify(body) }),
+  get: <T>(path: string, options?: RequestOptions) => request<T>(path, options),
+  post: <T>(path: string, body: unknown, options?: RequestOptions) =>
+    request<T>(path, { ...options, method: 'POST', body: JSON.stringify(body) }),
+  patch: <T>(path: string, body: unknown, options?: RequestOptions) =>
+    request<T>(path, { ...options, method: 'PATCH', body: JSON.stringify(body) }),
 }
