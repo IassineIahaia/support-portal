@@ -6,7 +6,7 @@ import { Badge } from "@/shared/ui/Badge";
 import { Select } from "@/shared/ui/Select";
 import { Button } from "@/shared/ui/Button";
 import { StatusTrail } from "@/features/requests/components/StatusTrail";
-import { ApiErrorState } from '@/shared/ui/ApiErrorState'
+import { ApiErrorState } from "@/shared/ui/ApiErrorState";
 import {
   statusToBadgeColor,
   priorityToBadgeColor,
@@ -58,18 +58,18 @@ export function RequestListPage() {
   }
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-6">
+    <div className="max-w-[115rem] mx-auto px-4 sm:px-8 py-6 sm:py-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
         <h1 className="font-headline text-2xl text-secondary">
           Service Requests
         </h1>
-        <Link to="/requests/new">
+        <Link to="/requests/new" className="self-start sm:self-auto">
           <Button variant="primary">+ New Request</Button>
         </Link>
       </div>
 
-      <div className="flex flex-wrap items-end gap-4 mb-6">
-        <label className="flex flex-col gap-1 text-xs font-body text-on-surface-variant flex-1 min-w-[240px]">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-end gap-3 sm:gap-4 mb-6">
+        <label className="flex flex-col gap-1 text-xs font-body text-on-surface-variant w-full sm:flex-1 sm:min-w-[240px]">
           <span className="uppercase tracking-wide font-semibold">Search</span>
           <input
             type="text"
@@ -80,38 +80,42 @@ export function RequestListPage() {
           />
         </label>
 
-        <Select
-          label="Status"
-          value={status}
-          onChange={(e) => updateParam("status", e.target.value)}
-        >
-          <option value="">All statuses</option>
-          <option value="OPEN">Open</option>
-          <option value="IN_PROGRESS">In Progress</option>
-          <option value="RESOLVED">Resolved</option>
-          <option value="CLOSED">Closed</option>
-        </Select>
+        <div className="grid grid-cols-2 sm:flex gap-3 sm:gap-4">
+          <Select
+            label="Status"
+            value={status}
+            onChange={(e) => updateParam("status", e.target.value)}
+          >
+            <option value="">All statuses</option>
+            <option value="OPEN">Open</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="RESOLVED">Resolved</option>
+            <option value="CLOSED">Closed</option>
+          </Select>
 
-        <Select
-          label="Priority"
-          value={priority}
-          onChange={(e) => updateParam("priority", e.target.value)}
-        >
-          <option value="">All priorities</option>
-          <option value="LOW">Low</option>
-          <option value="MEDIUM">Medium</option>
-          <option value="HIGH">High</option>
-          <option value="CRITICAL">Critical</option>
-        </Select>
+          <Select
+            label="Priority"
+            value={priority}
+            onChange={(e) => updateParam("priority", e.target.value)}
+          >
+            <option value="">All priorities</option>
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+            <option value="CRITICAL">Critical</option>
+          </Select>
 
-        <Select
-          label="Sort by"
-          value={sort}
-          onChange={(e) => updateParam("sort", e.target.value)}
-        >
-          <option value="-createdAt">Newest first</option>
-          <option value="createdAt">Oldest first</option>
-        </Select>
+          <div className="col-span-2 sm:col-span-1">
+            <Select
+              label="Sort by"
+              value={sort}
+              onChange={(e) => updateParam("sort", e.target.value)}
+            >
+              <option value="-createdAt">Newest first</option>
+              <option value="createdAt">Oldest first</option>
+            </Select>
+          </div>
+        </div>
       </div>
 
       {isLoading && (
@@ -119,7 +123,7 @@ export function RequestListPage() {
           Loading requests…
         </div>
       )}
-   {isError && <ApiErrorState error={error} onRetry={() => refetch()} />}
+      {isError && <ApiErrorState error={error} onRetry={() => refetch()} />}
 
       {data && data.items.length === 0 && (
         <div className="bg-white border border-outline/30 rounded-container p-8 text-center font-body text-on-surface-variant">
@@ -136,27 +140,33 @@ export function RequestListPage() {
               <Link
                 key={r.id}
                 to={`/requests/${r.id}`}
-                className="bg-white border border-outline/30 rounded-container p-4 flex items-center gap-4 hover:border-primary transition-colors"
+                className="bg-white border border-outline/30 rounded-container p-4 hover:border-primary transition-colors flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
               >
-                <span className="font-technical text-xs bg-surface-container px-2 py-1 rounded-standard">
-                  {r.id}
-                </span>
-                <span className="font-body font-medium flex-1">{r.title}</span>
-                <span className="font-body text-sm text-on-surface-variant hidden md:inline">
-                  {r.requesterName}
-                </span>
-                <Badge color={priorityToBadgeColor[r.priority]!}>
-                  {r.priority}
-                </Badge>
-                <Badge color={statusToBadgeColor[r.status]!}>
-                  {r.status.replace("_", " ")}
-                </Badge>
+                <div className="flex items-center gap-3 sm:contents">
+                  <span className="font-technical text-xs bg-surface-container px-2 py-1 rounded-standard shrink-0">
+                    {r.id}
+                  </span>
+                  <span className="font-body font-medium sm:flex-1">{r.title}</span>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                  <span className="font-body text-sm text-on-surface-variant">
+                    {r.requesterName}
+                  </span>
+                  <Badge color={priorityToBadgeColor[r.priority]!}>
+                    {r.priority}
+                  </Badge>
+                  <Badge color={statusToBadgeColor[r.status]!}>
+                    {r.status.replace("_", " ")}
+                  </Badge>
+                </div>
+
                 <StatusTrail status={r.status} />
               </Link>
             ))}
           </div>
 
-          <div className="flex items-center justify-between mt-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-6">
             <span className="font-body text-sm text-on-surface-variant">
               Page {data.page} of {data.totalPages} · {data.total} total
             </span>
