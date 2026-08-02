@@ -14,7 +14,7 @@ export function useCreateServiceRequest() {
     mutationFn: (body: CreateServiceRequest) =>
       apiClient.post<ServiceRequest>('/requests', body, { token: auth.user?.access_token }),
     onSuccess: () => {
-      // Invalida a lista para que ela recarregue com o novo item
+    
       queryClient.invalidateQueries({ queryKey: ['service-requests'] })
     },
   })
