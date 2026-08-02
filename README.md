@@ -183,5 +183,5 @@ The workflow fails fast on the first failing step, giving quick feedback on regr
 
 ## Live Deployment
 
-- **App**: _link a preencher após o deploy na Vercel_
+- **App**: https://support-portal-phi.vercel.app
 - **Repository**: https://github.com/IassineIahaia/support-portal
