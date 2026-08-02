@@ -14,8 +14,9 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: false,
       devOptions: {
-        enabled: true,
+        enabled: false,
       },
       includeAssets: ["favicon.ico"],
       manifest: {
