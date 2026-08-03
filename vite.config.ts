@@ -47,21 +47,8 @@ export default defineConfig({
         ],
       },
       workbox: {
-        // Assets estáticos (JS/CSS/fontes): cache-first, já cobertos automaticamente pelo Workbox
-        // Chamadas à API: network-first com fallback de cache quando offline
-        runtimeCaching: [
-          {
-            urlPattern: /^\/api\/requests/,
-            handler: "NetworkFirst",
-            options: {
-              cacheName: "api-requests-cache",
-              networkTimeoutSeconds: 5,
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-        ],
+        navigateFallback: undefined,
+        globPatterns: ["**/*.{js,css,ico,png,svg,webmanifest}"],
       },
     }),
   ],
