@@ -5,10 +5,10 @@ import { auth0LogoutUrl } from "@/features/auth/lib/oidc-config";
 export function Header() {
   const auth = useAuth();
 
-  const handleLogout = () => {
-    void auth.removeUser();
-    window.location.href = auth0LogoutUrl();
-  };
+const handleLogout = () => {
+  void auth.removeUser();
+  window.location.href = auth0LogoutUrl();
+};
 
   return (
     <>
