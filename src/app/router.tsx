@@ -5,6 +5,7 @@ import { CreateRequestPage } from '@/features/requests/pages/CreateRequestPage'
 import { CallbackPage } from '@/features/auth/pages/CallbackPage'
 import { NotFoundPage } from '@/shared/ui/NotFoundPage'
 import { RequireAuth } from '@/features/auth/components/RequireAuth'
+import { LoggedOutPage } from "@/features/auth/pages/LoggedOutPage";
 
 export const router = createBrowserRouter([
   { path: '/', element: <Navigate to="/requests" replace /> },
@@ -33,5 +34,6 @@ export const router = createBrowserRouter([
     ),
   },
   { path: '/callback', element: <CallbackPage /> },
+  { path: "/logged-out", element: <LoggedOutPage /> },
   { path: '*', element: <NotFoundPage /> },
 ])

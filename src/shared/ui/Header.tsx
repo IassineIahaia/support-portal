@@ -6,7 +6,6 @@ export function Header() {
   const auth = useAuth();
 
 const handleLogout = () => {
-  void auth.removeUser();
   window.location.href = auth0LogoutUrl();
 };
 
